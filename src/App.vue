@@ -10,12 +10,12 @@
 
 <script>
 // 导入公共组件
-import mHeader from './components/m-header/m-header' // 头部
+import MHeader from './components/m-header/m-header' // 头部
 import Tab from './components/tab/tab' // tab栏
 
 export default {
   components: {
-    mHeader,
+    MHeader,
     Tab
   }
 }

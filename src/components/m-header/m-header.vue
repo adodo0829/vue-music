@@ -3,6 +3,10 @@
   <div class="m-header">
     <div class="icon"></div>
     <h1 class="text">QQ Music</h1>
+    <!-- 个人中心 -->
+    <router-link tag="div" class="mine" to="/user">
+      <i class="icon-mine"></i>
+    </router-link>
   </div>
 </template>
 
