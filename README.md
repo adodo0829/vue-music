@@ -6,6 +6,7 @@
 ## vue-music项目过程记录
 
 ### 1.需求分析
+
 页面划分; 页面实现的功能点; 页面之间的关联; 实现细节等
 
     主页面: 
@@ -19,6 +20,7 @@
     用户中心页面:
 
 ## 2.搭建环境
+
     脚手架快速搭建项目: vue init webpack vue-music
     主要项目目录介绍:
         /src: 主要项目文件
@@ -46,6 +48,7 @@
         https://juejin.im/post/5afede99f265da0b82630af8
 
 ## 3.主页面
+
     问题1: stylus文件打包错误;无法解析变量; 原因是main.js直接将导入的styl文件解析为css, 需要在util.js中配置路径选项
     解决方案:
         const stylusOptions = {
@@ -57,11 +60,12 @@
                 path.join(__dirname, "../")
             ]
         }
+        
     问题2: 路由link更改默认标签a,  使用tag属性="div", 方便写样式
 
 ## 4.公共方法封装
 
-    1. 原生jsonp的Promise封装
+    1.原生jsonp的Promise封装
         function jsonp(url, data, option) {
             return new Promise((resolve, reject) => {
                 调用原生jsonp, 对回调结果进行处理
@@ -73,8 +77,7 @@
     1.轮播图组件封装
         基于better-scroll + 生命周期钩子mounted实现 + 类名操作方法封装
         
-        // 坑点: 请求数据时异步, 获取图片尺寸需要在渲染后才能获取到
-        // 需要在对 返回数据做一个判断
+        // 坑点: 请求数据为异步, 图片尺寸需要在渲染后才能获取到, 然后给slider盒子设置尺寸
+        // 需要对返回的图片数据做一个判断
 
 ## 6.推荐页面
-
