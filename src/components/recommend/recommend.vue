@@ -5,7 +5,7 @@
       <div>
         <div v-if="recommends.length" class="slider-wrapper" ref="sliderWrapper">
           <slider>
-            <!-- 插槽内容 -->
+            <!-- 插槽内容 slot: html替换 -->
             <div v-for="item in recommends" :key="item.id">
               <a :href="item.linkUrl">
                 <img class="needsclick" :src="item.picUrl">
@@ -53,7 +53,7 @@ export default {
     // 组件数据
     data() {
         return {
-            recommends: []
+            recommends: [] // 轮播图数据
         }
     },
     // 方法属性
@@ -62,11 +62,14 @@ export default {
         getRecommend() {
             // 调用 api中接口请求函数: 它返回的时一个promise对象
             getRecommendData().then(res => {
-                if (res.code === noError) console.log(res.data.slider);
+                if (res.code === noError) {
+                  console.log(res.data.slider);
+                  this.recommends = res.data.slider
+                }
             })
         },
     },
-    // 子组件
+    // 子组件注册
     components: {
         slider // 轮播图
     }
@@ -74,8 +77,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-// 导入样式
-@import "../../common/stylus/variable.styl"
+  // 导入样式
+  @import "../../common/stylus/variable.styl"
 
   .recommend
     position: fixed

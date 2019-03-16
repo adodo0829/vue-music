@@ -1,3 +1,4 @@
+/* eslint-disable */
 // 导入babel
 import 'babel-polyfill'
 import Vue from 'vue'
