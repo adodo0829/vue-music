@@ -86,3 +86,6 @@
 ## 6.推荐页面
 
     1. 项目报错信息记录: 编译报错 更改vue-loader库中的parser-babel
+    2. Vuex中 在组件中添加 动态新属性时 vuex不会跟踪, 需要使用this.$set(obj, key, v)
+        来添加 属性的双向绑定
+    3. router配置 meta 元信息字段: 在导航守卫中 用作判断条件

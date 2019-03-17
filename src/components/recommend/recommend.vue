@@ -1,7 +1,7 @@
 <template>
     <!-- 推荐页结构 -->
   <div class="recommend" ref="recommend">
-    <!-- <scroll ref="scroll" class="recommend-content" :data="discList"> -->
+    <scroll ref="scroll" class="recommend-content" :data="discList">
       <div>
         <div v-if="recommends.length" class="slider-wrapper" ref="sliderWrapper">
           <slider>
@@ -32,7 +32,7 @@
       <!-- <div class="loading-container" v-show="!discList.length">
         <loading></loading>
       </div> -->
-    <!-- </scroll> -->
+    </scroll>
     <!-- <router-view></router-view> -->
   </div>
 </template>
@@ -93,7 +93,7 @@ export default {
         width: 100%
         overflow: hidden
       .recommend-list
-        .list-title
+        h1.list-title
           height: 65px
           line-height: 65px
           text-align: center
