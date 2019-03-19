@@ -1,14 +1,15 @@
 <template>
     <!-- 推荐页结构 -->
   <div class="recommend" ref="recommend">
-    <scroll ref="scroll" class="recommend-content" :data="discList">
+    <!-- 给子组件传  data属性 -->
+    <scroll ref="scroll" class="recommend-content" :data="cateList">
       <div>
         <div v-if="recommends.length" class="slider-wrapper" ref="sliderWrapper">
           <slider>
             <!-- 插槽内容 slot: html替换 -->
             <div v-for="item in recommends" :key="item.id">
               <a :href="item.linkUrl">
-                <img class="needsclick" :src="item.picUrl">
+                <img class="needsclick" @load="loadImage" :src="item.picUrl">
               </a>
             </div>
 
@@ -17,15 +18,15 @@
         <div class="recommend-list">
           <h1 class="list-title">热门歌单推荐</h1>
           <ul>
-            <!-- <li @click="selectItem(item)" v-for="item in discList" class="item">
+            <li v-for="item in cateList" class="item">
               <div class="icon">
-                <img width="60" height="60" v-lazy="item.imgurl">
+                <img width="60" height="60" :src="item.imgurl">
               </div>
               <div class="text">
                 <h2 class="name" v-html="item.creator.name"></h2>
                 <p class="desc" v-html="item.dissname"></p>
               </div>
-            </li> -->
+            </li>
           </ul>
         </div>
       </div>
@@ -39,21 +40,24 @@
 
 <script>
 // 导入页面依赖包
-import { getRecommendData } from "../../api/recommend.js"
+import { getRecommendData, getCateList } from "../../api/recommend.js"
 import { noError } from "../../api/jsonpConfig.js";
 // 导入基础组件: 轮播图
 import slider from '../../baseComponents/slider';
+import scroll from '../../baseComponents/scroll';
 
 export default {
     // 在created钩子中发请求
     created() {
         // 调用
-        this.getRecommend()
+        this.getRecommend() // 轮播图数据
+        this.getCate() // 歌单数据
     },
     // 组件数据
     data() {
         return {
-            recommends: [] // 轮播图数据
+            recommends: [], // 轮播图数据
+            cateList: []  // 歌单数据
         }
     },
     // 方法属性
@@ -68,10 +72,26 @@ export default {
                 }
             })
         },
+        getCate() {
+          // 调用api
+          getCateList().then(res => {
+            console.log(res);
+            if (res.code === noError) {
+                this.cateList = res.data.list
+            }
+          })
+        },
+        loadImage() {
+          if (!this.checkloaded) {
+            this.checkloaded = true
+            this.$refs.scroll.refresh()
+          }
+        },
     },
     // 子组件注册
     components: {
-        slider // 轮播图
+        slider, // 轮播图
+        scroll //  滚动条
     }
 }
 </script>

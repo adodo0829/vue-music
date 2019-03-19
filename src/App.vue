@@ -4,7 +4,10 @@
     <m-header></m-header>
     <tab></tab>
     <!-- 路由显示组件 -->
-    <router-view></router-view>
+    <!-- 使用keep-alive优化: 去缓存DOM -->
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 

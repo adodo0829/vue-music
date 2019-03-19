@@ -60,6 +60,7 @@ export default {
           this.play()
       }
     }, 100);
+    // 监听窗口变化
     window.addEventListener('resize', () => {
         if (!this.slider) {
           return
@@ -68,9 +69,10 @@ export default {
         this.slider.refresh()
       })
   },
-   destroyed() {
-      clearTimeout(this.timer)
-    },
+  // 定时器清除
+  destroyed() {
+    clearTimeout(this.timer)
+  },
 	// 方法属性
 	methods: {
 		// 轮播图横向滚动; 给slider盒子设置宽度,
@@ -97,7 +99,7 @@ export default {
       }
       // 设置盒子总宽度
       this.$refs.sliderGroup.style.width = totalWidth + 'px'
-      console.log(this.$refs.sliderGroup.style.width);
+      // console.log(this.$refs.sliderGroup.style.width);
     },
     // 初始化 dot长度
     initDots() {
@@ -126,17 +128,20 @@ export default {
           snap: {loop: this.loop},
           snapThreshold: 0.3,
           snapSpeed: 400,
-          click: true,
+          // click: true,
       });
       // 添加滚动事件
       this.slider.on('scrollEnd', () => {
           let pageIndex = this.slider.getCurrentPage().pageX
+          console.log(pageIndex);
           if (this.loop) {
             pageIndex -= 1
           }
           this.currentPageIndex = pageIndex
 
+          // 使用 setTimeout 完成自动轮播
           if (this.autoPlay) {
+            // 清除定时器, 继续 轮播
             clearTimeout(this.timer)
             this.play()
           }
